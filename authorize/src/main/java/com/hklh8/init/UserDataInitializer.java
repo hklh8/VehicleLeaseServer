@@ -48,12 +48,15 @@ public class UserDataInitializer extends AbstractDataInitializer {
     @Override
     protected void doInit() {
         Role admin = initRole(AuthorizeConstants.SYS_MANAGER);
-        Role clerk = initRole(AuthorizeConstants.SHOP_MANAGER);
+
+        Role leasingCompany = initRole(AuthorizeConstants.LEASING_COMPANY);     //租赁公司
+        Role ordinaryUser = initRole(AuthorizeConstants.ORDINARY_USER);         //普通用户
+        Role parkManager = initRole(AuthorizeConstants.PARK_MANAGER);           //停车场管理员
 
         initResource();
 
         initAdminResources(admin);
-        initClerkResources(clerk);
+//        initClerkResources(clerk);
     }
 
     /**
@@ -72,34 +75,34 @@ public class UserDataInitializer extends AbstractDataInitializer {
     protected void initResource() {
         Resource root = createRoot(AuthorizeConstants.ROOT_NODE);
 
-        createResource(AuthorizeConstants.HOME, AuthorizeConstants.ICON_HOME, AuthorizeConstants.UI_INDEX, "home", ResourceType.MENU, root);
-        createResource(AuthorizeConstants.EQUIP_LIST, AuthorizeConstants.ICON_NETBAR_LIST, AuthorizeConstants.UI_NETBAR_LIST, "netBar", ResourceType.MENU, root);
-        createResource(AuthorizeConstants.GLOBAL_SETTING, AuthorizeConstants.ICON_GLOBAL_SET, AuthorizeConstants.UI_GLOBAL_SET, "global", ResourceType.MENU, root);
-        createResource(AuthorizeConstants.INFO_MONITOR, AuthorizeConstants.ICON_INFO_MONITOR, AuthorizeConstants.UI_INFO_MONITOR, "infoMonitor", ResourceType.MENU, root);
-        Resource infoManage = createResource(AuthorizeConstants.INFO_MANAGE, AuthorizeConstants.ICON_INFO_MANAGE, "0", "msgManage", ResourceType.MENU, root);
-
-        createResource(AuthorizeConstants.BEHAVIOR_LOG, null, AuthorizeConstants.UI_BEHAVIOR_LOG, "equipLog", ResourceType.MENU, infoManage);
-        createResource(AuthorizeConstants.SYS_LOG, null, AuthorizeConstants.UI_SYS_LOG, "sysLog", ResourceType.MENU, infoManage);
-        Resource customerInfo = createResource(AuthorizeConstants.USER_INFO, null, AuthorizeConstants.UI_USER_INFO,
-                "customerInfo", ResourceType.MENU, infoManage);
-        createResource(AuthorizeConstants.SHOP_MANAGER, null, AuthorizeConstants.UI_SHOP_MANAGER, "netSiteOpUser", ResourceType.MENU, infoManage);
-        createResource(AuthorizeConstants.SYS_MANAGER, null, AuthorizeConstants.UI_SYS_MANAGER, "sysManager", ResourceType.MENU, infoManage);
-
-        //管理员登录用户信息页面拥有权限的三个按钮
-        createResource("查找/刷新", null, null, "find", ResourceType.BUTTON, customerInfo);
-        createResource("修改", null, null, "update", ResourceType.BUTTON, customerInfo);
-        createResource("删除", null, null, "del", ResourceType.BUTTON, customerInfo);
-
-
-        //************************************************网点管理员菜单***************************************************************//
-        //网点管理员菜单(用户信息)
-        Resource clerkUserInfo = createResource(AuthorizeConstants.USER_INFO, AuthorizeConstants.ICON_CLERK_USER_INFO, AuthorizeConstants.CLERK_USER_INFO,
-                "msgManage/customerInfo", ResourceType.MENU, root);
-        //网点管理员登录用户信息页面拥有权限的按钮
-        createResource("查找/刷新", null, null, "find", ResourceType.BUTTON, clerkUserInfo);
-        createResource("录入", null, null, "add", ResourceType.BUTTON, clerkUserInfo);
-        createResource("文件导入", null, null, "upload", ResourceType.BUTTON, clerkUserInfo);
-        createResource("下载模版", null, null, "down", ResourceType.BUTTON, clerkUserInfo);
+//        createResource(AuthorizeConstants.HOME, AuthorizeConstants.ICON_HOME, AuthorizeConstants.UI_INDEX, "home", ResourceType.MENU, root);
+//        createResource(AuthorizeConstants.EQUIP_LIST, AuthorizeConstants.ICON_NETBAR_LIST, AuthorizeConstants.UI_NETBAR_LIST, "netBar", ResourceType.MENU, root);
+//        createResource(AuthorizeConstants.GLOBAL_SETTING, AuthorizeConstants.ICON_GLOBAL_SET, AuthorizeConstants.UI_GLOBAL_SET, "global", ResourceType.MENU, root);
+//        createResource(AuthorizeConstants.INFO_MONITOR, AuthorizeConstants.ICON_INFO_MONITOR, AuthorizeConstants.UI_INFO_MONITOR, "infoMonitor", ResourceType.MENU, root);
+//        Resource infoManage = createResource(AuthorizeConstants.INFO_MANAGE, AuthorizeConstants.ICON_INFO_MANAGE, "0", "msgManage", ResourceType.MENU, root);
+//
+//        createResource(AuthorizeConstants.BEHAVIOR_LOG, null, AuthorizeConstants.UI_BEHAVIOR_LOG, "equipLog", ResourceType.MENU, infoManage);
+//        createResource(AuthorizeConstants.SYS_LOG, null, AuthorizeConstants.UI_SYS_LOG, "sysLog", ResourceType.MENU, infoManage);
+//        Resource customerInfo = createResource(AuthorizeConstants.USER_INFO, null, AuthorizeConstants.UI_USER_INFO,
+//                "customerInfo", ResourceType.MENU, infoManage);
+//        createResource(AuthorizeConstants.SHOP_MANAGER, null, AuthorizeConstants.UI_SHOP_MANAGER, "netSiteOpUser", ResourceType.MENU, infoManage);
+//        createResource(AuthorizeConstants.SYS_MANAGER, null, AuthorizeConstants.UI_SYS_MANAGER, "sysManager", ResourceType.MENU, infoManage);
+//
+//        //管理员登录用户信息页面拥有权限的三个按钮
+//        createResource("查找/刷新", null, null, "find", ResourceType.BUTTON, customerInfo);
+//        createResource("修改", null, null, "update", ResourceType.BUTTON, customerInfo);
+//        createResource("删除", null, null, "del", ResourceType.BUTTON, customerInfo);
+//
+//
+//        //************************************************网点管理员菜单***************************************************************//
+//        //网点管理员菜单(用户信息)
+//        Resource clerkUserInfo = createResource(AuthorizeConstants.USER_INFO, AuthorizeConstants.ICON_CLERK_USER_INFO, AuthorizeConstants.CLERK_USER_INFO,
+//                "msgManage/customerInfo", ResourceType.MENU, root);
+//        //网点管理员登录用户信息页面拥有权限的按钮
+//        createResource("查找/刷新", null, null, "find", ResourceType.BUTTON, clerkUserInfo);
+//        createResource("录入", null, null, "add", ResourceType.BUTTON, clerkUserInfo);
+//        createResource("文件导入", null, null, "upload", ResourceType.BUTTON, clerkUserInfo);
+//        createResource("下载模版", null, null, "down", ResourceType.BUTTON, clerkUserInfo);
 
     }
 

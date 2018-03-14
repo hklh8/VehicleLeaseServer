@@ -8,7 +8,9 @@ public interface AuthorizeConstants {
     String SUPER_ADMIN = "root";
 
     String SYS_MANAGER = "系统管理员";
-    String SHOP_MANAGER = "网点管理员";
+    String LEASING_COMPANY = "租赁公司";
+    String ORDINARY_USER = "普通用户";
+    String PARK_MANAGER = "停车场管理员";
 
     String ROOT_NODE = "根节点";
 
