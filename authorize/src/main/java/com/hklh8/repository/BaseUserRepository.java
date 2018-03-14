@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * Created by GouBo on 2018/1/2.
  */
 @Repository
-public interface UserRepository extends DefaultRepository<BaseUser> {
+public interface BaseUserRepository extends DefaultRepository<BaseUser> {
     BaseUser findUserByUsernameAndActive(String username, boolean active);
 
     @Query(value = "select * from user where id in (select user_id from role_user where role_id = :roleId) /*#pageable*/",

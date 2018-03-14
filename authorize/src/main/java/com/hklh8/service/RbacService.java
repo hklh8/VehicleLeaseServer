@@ -2,7 +2,7 @@ package com.hklh8.service;
 
 import com.hklh8.domain.BaseUser;
 import com.hklh8.properties.AuthorizeConstants;
-import com.hklh8.repository.UserRepository;
+import com.hklh8.repository.BaseUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class RbacService {
     private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     @Autowired
-    private UserRepository userRepository;
+    private BaseUserRepository baseUserRepository;
 
     public boolean hasPermission(HttpServletRequest request, Authentication authentication) {
         String username = (String) authentication.getPrincipal();
@@ -29,7 +29,7 @@ public class RbacService {
         if (AuthorizeConstants.SUPER_ADMIN.equals(username)) {
             hasPermission = true;
         } else {
-            BaseUser baseUser = userRepository.findUserByUsernameAndActive(username, true);
+            BaseUser baseUser = baseUserRepository.findUserByUsernameAndActive(username, true);
             if (baseUser == null) {
                 return false;
             }

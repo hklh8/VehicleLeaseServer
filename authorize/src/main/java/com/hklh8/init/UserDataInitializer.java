@@ -28,7 +28,7 @@ public class UserDataInitializer extends AbstractDataInitializer {
     private RoleRepository roleRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private BaseUserRepository baseUserRepository;
 
     @Autowired
     private RoleUserRepository roleUserRepository;

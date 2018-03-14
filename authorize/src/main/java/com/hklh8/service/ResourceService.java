@@ -4,7 +4,7 @@ import com.hklh8.domain.BaseUser;
 import com.hklh8.domain.Resource;
 import com.hklh8.dto.ResourceInfo;
 import com.hklh8.repository.ResourceRepository;
-import com.hklh8.repository.UserRepository;
+import com.hklh8.repository.BaseUserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,13 +23,13 @@ public class ResourceService {
     @Autowired
     private ResourceRepository resourceRepository;
     @Autowired
-    private UserRepository userRepository;
+    private BaseUserRepository baseUserRepository;
 
     /**
      * 获取资源树
      */
     public ResourceInfo getTree(String username) {
-        BaseUser baseUser = userRepository.findUserByUsernameAndActive(username, true);
+        BaseUser baseUser = baseUserRepository.findUserByUsernameAndActive(username, true);
         return resourceRepository.findByName("根节点").toTree(baseUser);
     }
 

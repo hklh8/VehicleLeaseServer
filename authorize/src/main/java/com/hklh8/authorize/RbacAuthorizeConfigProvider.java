@@ -16,10 +16,7 @@ public class RbacAuthorizeConfigProvider implements AuthorizeConfigProvider {
 
     @Override
     public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
-        config.antMatchers(HttpMethod.GET, "/**/*.html").permitAll()
-                .antMatchers(HttpMethod.POST, "/equipLogReport/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/encrypt/**").permitAll()
-                .antMatchers("/dyLog/**").permitAll()
+        config.antMatchers(HttpMethod.POST, "/register").permitAll()
                 .antMatchers(HttpMethod.GET, "/user/me", "/resource").authenticated()
                 .antMatchers(HttpMethod.POST, "/signOut").authenticated()
                 .anyRequest().access("@rbacService.hasPermission(request, authentication)");

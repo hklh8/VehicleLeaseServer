@@ -1,7 +1,7 @@
 package com.hklh8.authentication;
 
 import com.hklh8.domain.BaseUser;
-import com.hklh8.repository.UserRepository;
+import com.hklh8.repository.BaseUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +22,12 @@ public class RbacUserDetailsService implements UserDetailsService {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private UserRepository userRepository;
+    private BaseUserRepository baseUserRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         logger.info("登录用户名:" + username);
-        BaseUser baseUser = userRepository.findUserByUsernameAndActive(username, true);
+        BaseUser baseUser = baseUserRepository.findUserByUsernameAndActive(username, true);
         if (baseUser == null) {
             throw new UsernameNotFoundException(username);
         }

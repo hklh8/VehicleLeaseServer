@@ -6,7 +6,7 @@ import com.hklh8.dto.UserCondition;
 import com.hklh8.dto.UserInfo;
 import com.hklh8.repository.RoleRepository;
 import com.hklh8.repository.RoleUserRepository;
-import com.hklh8.repository.UserRepository;
+import com.hklh8.repository.BaseUserRepository;
 import com.hklh8.repository.spec.UserSpec;
 import com.hklh8.repository.support.QueryResultConverter;
 import org.apache.commons.collections.CollectionUtils;
@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private BaseUserRepository baseUserRepository;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -45,7 +45,7 @@ public class UserService {
         BaseUser baseUser = new BaseUser();
         BeanUtils.copyProperties(userInfo, baseUser);
         baseUser.setPassword(passwordEncoder.encode("123456"));
-        userRepository.save(baseUser);
+        baseUserRepository.save(baseUser);
         userInfo.setId(baseUser.getId());
 
         createRoleUser(userInfo, baseUser);
@@ -57,7 +57,7 @@ public class UserService {
      * 修改用户
      */
     public UserInfo update(UserInfo userInfo) {
-        BaseUser baseUser = userRepository.findOne(userInfo.getId());
+        BaseUser baseUser = baseUserRepository.findOne(userInfo.getId());
         BeanUtils.copyProperties(userInfo, baseUser);
 
         createRoleUser(userInfo, baseUser);
@@ -81,14 +81,14 @@ public class UserService {
      * 删除用户
      */
     public void delete(Long id) {
-        userRepository.delete(id);
+        baseUserRepository.delete(id);
     }
 
     /**
      * 获取用户详细信息
      */
     public UserInfo getInfo(Long id) {
-        BaseUser baseUser = userRepository.findOne(id);
+        BaseUser baseUser = baseUserRepository.findOne(id);
         UserInfo info = new UserInfo();
         BeanUtils.copyProperties(baseUser, info);
         return info;
@@ -98,12 +98,12 @@ public class UserService {
      * 分页查询用户
      */
     public Page<UserInfo> query(UserCondition condition, Pageable pageable) {
-        Page<BaseUser> users = userRepository.findAll(new UserSpec(condition), pageable);
+        Page<BaseUser> users = baseUserRepository.findAll(new UserSpec(condition), pageable);
         return QueryResultConverter.convert(users, UserInfo.class, pageable);
     }
 
     public Page<UserInfo> queryByRole(Long roleId, Pageable pageable) {
-        Page<BaseUser> users = userRepository.findByRoleId(roleId, pageable);
+        Page<BaseUser> users = baseUserRepository.findByRoleId(roleId, pageable);
         return QueryResultConverter.convert(users, UserInfo.class, pageable);
     }
 }
